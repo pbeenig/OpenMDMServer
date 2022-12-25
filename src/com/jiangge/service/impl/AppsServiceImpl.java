@@ -1,26 +1,24 @@
 package com.jiangge.service.impl;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Component;
-
 import com.jiangge.dao.AppsDao;
 import com.jiangge.pojo.Apps;
 import com.jiangge.service.AppsService;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 public class AppsServiceImpl implements AppsService {
-	
+
 	private AppsDao appsDao;
-	
+
 	@Override
 	public void save(Apps apps) {
 		appsDao.add(apps);
 	}
-	
+
 	@Override
 	public Apps getAppsById(String id) {
 		return appsDao.getAppsById(id);
@@ -34,7 +32,7 @@ public class AppsServiceImpl implements AppsService {
 	public AppsDao getAppsDao() {
 		return appsDao;
 	}
-	
+
 	@Resource
 	public void setAppsDao(AppsDao appsDao) {
 		this.appsDao = appsDao;
@@ -86,6 +84,6 @@ public class AppsServiceImpl implements AppsService {
 	public List<Apps> getAppsByDeviceId(String queryString,Object... params) {
 		return appsDao.getAppsByHql(queryString, params);
 	}
-	
-	
+
+
 }

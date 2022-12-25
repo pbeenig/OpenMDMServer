@@ -1,10 +1,10 @@
 package com.jiangge.pojo;
-import java.io.Serializable;
-import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="apps")
@@ -15,7 +15,7 @@ public class Apps implements Serializable {
     @Id
     private String  id;
     /**设备编号（和Device主键对应）**/
-    private String  deviceId; 
+    private String  deviceId;
     /**以下是通过MDM获取的**/
     private String  bundleSize;
     private String  dynamicSize;
@@ -24,11 +24,11 @@ public class Apps implements Serializable {
     private String  shortVersion;
     private String  version;
     private String  managedAppsOnly;
-    
+
     /**添加时间**/
     private Timestamp createTime = new Timestamp(System.currentTimeMillis());
-    
-    
+
+
 	public String getManagedAppsOnly() {
 		return managedAppsOnly;
 	}
@@ -107,8 +107,8 @@ public class Apps implements Serializable {
 
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
-	} 
+	}
 
-    
+
 
 }

@@ -1,11 +1,8 @@
 package com.jiangge.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import org.apache.log4j.Logger;
+
+import java.io.*;
 import java.security.MessageDigest;
 import java.text.NumberFormat;
 import java.util.HashSet;
@@ -15,18 +12,16 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
-
 /**
  * 字符串处理类
  */
 @SuppressWarnings("all")
 public class StringUtil {
 	private static final Logger logger = Logger.getLogger(StringUtil.class);
-	
+
 	/**
 	 * MD5加密处理
-	 * 
+	 *
 	 * @param s
 	 * @return
 	 */
@@ -59,7 +54,7 @@ public class StringUtil {
 
 	/**
 	 * 取指定小数位的浮点数,不够小数位数时补零
-	 * 
+	 *
 	 * @param floStr
 	 * @return
 	 */
@@ -81,7 +76,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param intStr
 	 * @return
 	 */
@@ -104,7 +99,7 @@ public class StringUtil {
 
 	/**
 	 * 把字符型数字转换成整型.
-	 * 
+	 *
 	 * @param str
 	 *            字符型数字
 	 * @return int 返回整型值。如果不能转换则返回默认值defaultValue.
@@ -180,7 +175,7 @@ public class StringUtil {
 
 	/**
 	 * 在长数字前补零
-	 * 
+	 *
 	 * @param num
 	 *            数字
 	 * @param length
@@ -199,7 +194,7 @@ public class StringUtil {
 
 	/**
 	 * 在数字前补零
-	 * 
+	 *
 	 * @param num
 	 *            数字
 	 * @param length
@@ -218,7 +213,7 @@ public class StringUtil {
 
 	/**
 	 * 使HTML的标签失去作用*
-	 * 
+	 *
 	 * @param input
 	 *            被操作的字符串
 	 * @return String
@@ -240,7 +235,7 @@ public class StringUtil {
 	/**
 	 * 对表单提交的数据进行处理，有专门针对textarea的数据进行处理的逻辑,对空格进行保留. 如果不是textarea提交的数据(根据是否有"<br>
 	 * "和"&nbsp;"进行判断)
-	 * 
+	 *
 	 * @param input
 	 */
 	public static final String escapeHTMLTag(String input) {
@@ -313,7 +308,7 @@ public class StringUtil {
 
 	/**
 	 * 还原html标签
-	 * 
+	 *
 	 * @param input
 	 * @return
 	 */
@@ -332,7 +327,7 @@ public class StringUtil {
 
 	/**
 	 * 把数组合成字符串
-	 * 
+	 *
 	 * @param str
 	 * @param seperator
 	 * @return
@@ -351,7 +346,7 @@ public class StringUtil {
 
 	/**
 	 * 把字符串分隔成数组
-	 * 
+	 *
 	 * @param str
 	 *            字符 如： 1/2/3/4/5
 	 * @param seperator
@@ -370,7 +365,7 @@ public class StringUtil {
 
 	/**
 	 * 按指定的分隔符分隔数据，有N个分隔符则返回一个N+1的数组
-	 * 
+	 *
 	 * @param str
 	 * @param seperator
 	 * @return
@@ -412,7 +407,7 @@ public class StringUtil {
 
 	/**
 	 * 按字节获取字符串的长度,一个汉字占二个字节
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -568,7 +563,7 @@ public class StringUtil {
 
 	/**
 	 * 判断是不是一个合法的电子邮件地址
-	 * 
+	 *
 	 * @param email
 	 * @return boolean
 	 */
@@ -585,7 +580,7 @@ public class StringUtil {
 
 	/**
 	 * 转换html特殊字符为html码
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -629,7 +624,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param word
 	 *            : 输入的字符串
 	 * @return 是否输入的是字符
@@ -654,7 +649,7 @@ public class StringUtil {
 	 * <li><span class="menuId">3.4</span><a href="#">其他著名人物</a></li>
 	 * </ol>
 	 * 返回一个字符串数组，序号1为解析后的数据，序号2为小题标数据
-	 * 
+	 *
 	 * @param input
 	 *            需要解析的原始数据
 	 * @param mark
@@ -700,7 +695,7 @@ public class StringUtil {
 
 	/**
 	 * 字符串截取
-	 * 
+	 *
 	 * @param str
 	 *            要处理的字符串
 	 * @param beginIndex
@@ -725,7 +720,7 @@ public class StringUtil {
 
 	/**
 	 * 随机生成几个不同的数
-	 * 
+	 *
 	 * @param lenth
 	 * @param num
 	 * @return
@@ -756,7 +751,7 @@ public class StringUtil {
 
 	/**
 	 * 字符串截取
-	 * 
+	 *
 	 * @param str
 	 *            要处理的字符串
 	 * @param beginIndex
@@ -791,7 +786,7 @@ public class StringUtil {
 	 * <P>
 	 * </P>
 	 * ,文章摘要使用
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -819,7 +814,7 @@ public class StringUtil {
 
 	/**
 	 * 给超链接加上:target="_blank"
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -880,7 +875,7 @@ public class StringUtil {
 
 	/**
 	 * 根据大图获得小图地址
-	 * 
+	 *
 	 * @param imgurl
 	 * @return
 	 */
@@ -913,7 +908,7 @@ public class StringUtil {
 	// }
 	/**
 	 * 把字符串切成每个字符
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -923,7 +918,7 @@ public class StringUtil {
 
 	/**
 	 * b代替a
-	 * 
+	 *
 	 * @param str
 	 * @param a
 	 * @param b
@@ -970,7 +965,7 @@ public class StringUtil {
 
 	/**
 	 * Description: 基本功能：过滤URL
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -983,7 +978,7 @@ public class StringUtil {
 
 	/**
 	 * 判断字符串是否正常(不为null，不为空)
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -996,7 +991,7 @@ public class StringUtil {
 
 	/**
 	 * 判断字符串是否一个数字
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -1008,7 +1003,7 @@ public class StringUtil {
 
 	/**
 	 * 获得字符串去掉空格、回车、tab之后的长度
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -1037,7 +1032,7 @@ public class StringUtil {
 
 	/**
 	 * 把double由科学计数法转为正常计数法
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -1052,7 +1047,7 @@ public class StringUtil {
 
 	/**
 	 * 验证邮箱地址是否正确
-	 * 
+	 *
 	 * @param email
 	 * @return
 	 */
@@ -1068,7 +1063,7 @@ public class StringUtil {
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * 格式化两位小数
 	 * @param old
@@ -1082,7 +1077,7 @@ public class StringUtil {
 		}
 		return newstr;
 	}
-	
+
 	/**
 	 * 格式化四位小数
 	 * @param old

@@ -15,19 +15,18 @@
  */
 package com.jiangge.apns4j.impl;
 
-import static com.jiangge.apns4j.model.ApnsConstants.*;
+import com.jiangge.apns4j.IApnsFeedbackConnection;
+import com.jiangge.apns4j.model.ApnsConfig;
+import com.jiangge.apns4j.model.Feedback;
+import com.jiangge.apns4j.tools.ApnsTools;
 
+import javax.net.SocketFactory;
 import java.io.InputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.SocketFactory;
-
-import com.jiangge.apns4j.IApnsFeedbackConnection;
-import com.jiangge.apns4j.model.ApnsConfig;
-import com.jiangge.apns4j.model.Feedback;
-import com.jiangge.apns4j.tools.ApnsTools;
+import static com.jiangge.apns4j.model.ApnsConstants.*;
 
 /**
  * @author RamosLi
@@ -67,9 +66,9 @@ public class ApnsFeedbackConnectionImpl implements IApnsFeedbackConnection {
 					/**
 					 * see The Feedback Service chapter
 					 * https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/CommunicatingWIthAPS.html
-					 * 
+					 *
 					 */
-					byte[] tokenByte = new byte[32]; 
+					byte[] tokenByte = new byte[32];
 					System.arraycopy(bytes, 6, tokenByte, 0, 32);
 					String token = ApnsTools.encodeHex(tokenByte).toLowerCase();
 					long time = ApnsTools.parse4ByteInt(bytes[0], bytes[1], bytes[2], bytes[3]);
@@ -95,5 +94,5 @@ public class ApnsFeedbackConnectionImpl implements IApnsFeedbackConnection {
 		}
 		return list;
 	}
-	
+
 }

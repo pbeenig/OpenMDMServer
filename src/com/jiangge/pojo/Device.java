@@ -1,11 +1,11 @@
 package com.jiangge.pojo;
-import java.io.Serializable;
-import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="device")
@@ -16,9 +16,9 @@ public class Device implements Serializable {
     @Id
     private String id;
     /**设备标志**/
-    private String deviceFlag; 
+    private String deviceFlag;
     /**设备编号（和Device主键对应）**/
-    private String deviceId; 
+    private String deviceId;
     /**以下是MDM推送相关**/
     private  String topic;
     private  String token;
@@ -44,14 +44,14 @@ public class Device implements Serializable {
     private  String isCloudBackupEnabled;
     private  String wifimac;
     private  String bluetoothMAC;
-    
-    
+
+
     /**注册时间**/
-    private Timestamp createTime = new Timestamp(System.currentTimeMillis()); 
+    private Timestamp createTime = new Timestamp(System.currentTimeMillis());
     /**设备状态（1：已认证；2可控制；-1：已移除）**/
     private String control;
     /**更新时间**/
-    private Timestamp updateTime = new Timestamp(System.currentTimeMillis()); 
+    private Timestamp updateTime = new Timestamp(System.currentTimeMillis());
 
 	public String getDeviceFlag() {
 		return deviceFlag;
@@ -268,6 +268,6 @@ public class Device implements Serializable {
 	public void setBluetoothMAC(String bluetoothMAC) {
 		this.bluetoothMAC = bluetoothMAC;
 	}
-	
+
 
 }

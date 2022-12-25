@@ -15,20 +15,19 @@
  */
 package com.jiangge.apns4j.tools;
 
+import com.jiangge.apns4j.model.Command;
+import com.jiangge.apns4j.model.FrameItem;
+
+import javax.net.SocketFactory;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyStore;
 import java.util.List;
-
-import javax.net.SocketFactory;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
-
-import com.jiangge.apns4j.model.Command;
-import com.jiangge.apns4j.model.FrameItem;
 
 /**
  * @author RamosLi
@@ -57,7 +56,7 @@ public class ApnsTools {
 		}
 		throw new RuntimeException();
 	}
-	
+
 	@Deprecated
 	public static byte[] generateData(int id, int expire, byte[] token, byte[] payload) {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -86,7 +85,7 @@ public class ApnsTools {
 		}
 		return sb.toString();
 	}
-	
+
 	public static byte[] decodeHex(String hex) {
 		byte[] bytes = new byte[hex.length() / 2];
 		for (int i = 0; i < bytes.length; i++) {
@@ -94,7 +93,7 @@ public class ApnsTools {
 		}
 		return bytes;
 	}
-	
+
 	/**
 	 * @param hex
 	 * @return 0---15
@@ -115,7 +114,7 @@ public class ApnsTools {
 	public static int parse4ByteInt(byte b1, byte b2, byte b3, byte b4) {
 		return ((b1 << 24) & 0xFF000000) | ((b2 << 16) & 0x00FF0000) | ((b3 << 8) & 0x0000FF00) | (b4 & 0x000000FF);
 	}
-	public static SocketFactory createSocketFactory(InputStream keyStore, String password, 
+	public static SocketFactory createSocketFactory(InputStream keyStore, String password,
 			String keystoreType, String algorithm, String protocol) {
 		try {
 			char[] pwdChars = password.toCharArray();
@@ -123,12 +122,12 @@ public class ApnsTools {
 			ks.load(keyStore, pwdChars);
 			KeyManagerFactory kf = KeyManagerFactory.getInstance(algorithm);
 			kf.init(ks, pwdChars);
-			
+
 			TrustManagerFactory tmf = TrustManagerFactory.getInstance(algorithm);
 	        tmf.init((KeyStore)null);
 	        SSLContext context = SSLContext.getInstance(protocol);
 			context.init(kf.getKeyManagers(), tmf.getTrustManagers(), null);
-			
+
 			return context.getSocketFactory();
 		} catch (Exception e) {
 			e.printStackTrace();

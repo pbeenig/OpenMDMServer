@@ -1,44 +1,37 @@
 package com.jiangge.controller;
 
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.jiangge.pojo.Admin;
-import com.jiangge.pojo.DeviceTemp;
 import com.jiangge.pojo.User;
-import com.jiangge.service.AdminService;
-import com.jiangge.service.CommandService;
-import com.jiangge.service.DeviceService;
-import com.jiangge.service.DeviceTempService;
-import com.jiangge.service.UserService;
+import com.jiangge.service.*;
 import com.jiangge.utils.ConfigUtils;
 import com.jiangge.utils.EmailUtil;
 import com.jiangge.utils.MDMTaskUtils;
 import com.jiangge.utils.StringUtil;
 import com.jiangge.vo.AdminVO;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @SuppressWarnings("all")
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
+
 	private DeviceService deviceService;
 	private CommandService commandService;
 	private DeviceTempService deviceTempService;
 	private UserService userService;
 	private AdminService adminService;
-	
+
 	/**
      * 邮箱注册
      * @throws Exception
@@ -84,12 +77,12 @@ public class UserController {
         }
         return map;
     }
-	
+
 	 /**
      * 下载设备控制描述文件功能
      * @throws Exception
      */
-    
+
     @RequestMapping("/download")
     public void downConfig(HttpServletRequest request,HttpServletResponse response) throws Exception {
         System.out.println("-------------------Download MobileConfig File Start---------------");
@@ -119,7 +112,7 @@ public class UserController {
         os.flush();
         os.close();
     }
-    
+
     /**
 	 * 后台登陆
 	 */
@@ -140,18 +133,18 @@ public class UserController {
 				admin.setRole("USER");
 				admin.setRemark(user.getRemark());
 				request.getSession().setAttribute("sysadmin", admin);
-				mav = new ModelAndView("redirect:/sysadmin/main.do");  
+				mav = new ModelAndView("redirect:/sysadmin/main.do");
 			}else{
-				mav = new ModelAndView("login");  
+				mav = new ModelAndView("login");
 				mav.addObject("msg", "密码输入错误,登录失败！");
 			}
 		}else{
-			mav = new ModelAndView("login");  
+			mav = new ModelAndView("login");
 			mav.addObject("msg", "邮箱账号不存在,登录失败！");
 		}
-		return mav;  
+		return mav;
 	}
-	
+
 	/**
 	 * 管理登陆
 	 */
@@ -172,28 +165,28 @@ public class UserController {
 				admin.setRemark(user.getRemark());
 				admin.setRole("ADMIN");
 				request.getSession().setAttribute("sysadmin", admin);
-				mav = new ModelAndView("redirect:/sysadmin/main.do");  
+				mav = new ModelAndView("redirect:/sysadmin/main.do");
 			}else{
-				mav = new ModelAndView("login");  
+				mav = new ModelAndView("login");
 				mav.addObject("msg", "密码输入错误,登录失败！");
 			}
 		}else{
-			mav = new ModelAndView("login");  
+			mav = new ModelAndView("login");
 			mav.addObject("msg", "账号不存在,登录失败！");
 		}
-		return mav;  
+		return mav;
 	}
-	
+
 	/****************************************************************/
 	public AdminService getAdminService() {
 		return adminService;
 	}
-	
+
 	@Resource
 	public void setAdminService(AdminService adminService) {
 		this.adminService = adminService;
 	}
-	
+
 	public DeviceService getDeviceService() {
 		return deviceService;
 	}
@@ -201,7 +194,7 @@ public class UserController {
 	public void setDeviceService(DeviceService deviceService) {
 		this.deviceService = deviceService;
 	}
-	
+
 	public CommandService getCommandService() {
 		return commandService;
 	}
@@ -209,7 +202,7 @@ public class UserController {
 	public void setCommandService(CommandService commandService) {
 		this.commandService = commandService;
 	}
-	
+
 	public DeviceTempService getDeviceTempService() {
 		return deviceTempService;
 	}
@@ -217,7 +210,7 @@ public class UserController {
 	public void setDeviceTempService(DeviceTempService deviceTempService) {
 		this.deviceTempService = deviceTempService;
 	}
-	
+
 	public UserService getUserService() {
 		return userService;
 	}
@@ -225,5 +218,5 @@ public class UserController {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 }

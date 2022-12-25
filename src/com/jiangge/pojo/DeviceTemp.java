@@ -1,9 +1,9 @@
 package com.jiangge.pojo;
-import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name="devicetemp")
@@ -14,9 +14,9 @@ public class DeviceTemp implements Serializable {
     @Id
     private String id;
     /**设备标志**/
-    private String deviceFlag; 
+    private String deviceFlag;
     /**设备编号（和Device主键对应）**/
-    private String deviceId; 
+    private String deviceId;
     /**回调地址**/
     private  String callBack;
 
@@ -52,5 +52,5 @@ public class DeviceTemp implements Serializable {
 		this.callBack = callBack;
 	}
 
-   
+
 }

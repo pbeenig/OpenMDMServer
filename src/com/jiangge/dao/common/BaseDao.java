@@ -1,11 +1,5 @@
 package com.jiangge.dao.common;
 
-import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -13,12 +7,17 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.List;
+
 @SuppressWarnings("all")
 @Component
 public class BaseDao {
-	
+
 	private HibernateTemplate hibernateTemplate;
-	
+
 	/**
 	 * 根据ID获取对象
 	 * @param c
@@ -32,7 +31,7 @@ public class BaseDao {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 根据ID获取对象
 	 * @param c
@@ -59,7 +58,7 @@ public class BaseDao {
 	public void update(Object o) {
 		hibernateTemplate.update(o);
 	}
-	
+
 	/**
 	 * 修改或者添加
 	 * @param o
@@ -67,7 +66,7 @@ public class BaseDao {
 	public void saveOrUpdate(Object o) {
 		hibernateTemplate.saveOrUpdate(o);
 	}
-	
+
 
 	/**
 	 * 修改(在session中已存在这个对象的修改)
@@ -183,7 +182,7 @@ public class BaseDao {
 		if (o != null)
 			hibernateTemplate.saveOrUpdate(o);
 	}
-	
+
 	/**
 	 * 更新
 	 * @param hql
@@ -202,14 +201,14 @@ public class BaseDao {
 		});
 	}
 
-	
+
 	public HibernateTemplate getHibernateTemplate() {
 		return hibernateTemplate;
 	}
-	
+
 	@Resource
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
-	
+
 }

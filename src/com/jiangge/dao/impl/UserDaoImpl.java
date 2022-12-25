@@ -1,12 +1,11 @@
 package com.jiangge.dao.impl;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import com.jiangge.dao.UserDao;
 import com.jiangge.dao.common.BaseDao;
 import com.jiangge.pojo.User;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class UserDaoImpl extends BaseDao implements UserDao {
@@ -28,7 +27,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		List<User> list = (List<User>) super.getAll(User.class);
 		return list;
 	}
-	
+
 	public User getByHql(String queryString,Object... params){
 		return (User)super.getByHql(queryString, params);
 	}
@@ -37,7 +36,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	public void saveOrUpdate(User user) {
 		super.saveOrUpdate(user);
 	}
-	
-	
-	
+
+
+
 }

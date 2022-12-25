@@ -1,39 +1,33 @@
 package com.jiangge.controller;
 
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.jiangge.pojo.Command;
 import com.jiangge.pojo.Device;
 import com.jiangge.pojo.DeviceTemp;
 import com.jiangge.service.CommandService;
 import com.jiangge.service.DeviceService;
 import com.jiangge.service.DeviceTempService;
-import com.jiangge.utils.ConfigUtils;
-import com.jiangge.utils.MDMTaskUtils;
-import com.jiangge.utils.MdmUtils;
-import com.jiangge.utils.PushUtils;
-import com.jiangge.utils.StringUtils;
+import com.jiangge.utils.*;
 import com.jiangge.vo.InstallTypeEnum;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/device")
 public class DeviceController {
-	
+
 	private DeviceService deviceService;
 	private CommandService commandService;
 	private DeviceTempService deviceTempService;
-	
+
 	/**
      * 获取设备Code
      * @throws Exception
@@ -69,7 +63,7 @@ public class DeviceController {
         }
         return map;
     }
-	
+
 	 /**
      * 下载设备控制描述文件功能
      * @throws Exception
@@ -97,7 +91,7 @@ public class DeviceController {
         os.flush();
         os.close();
     }
-	
+
     /**
      * 设备锁屏功能
      * @throws Exception
@@ -273,7 +267,7 @@ public class DeviceController {
             map.put("msg", "请求参数不完整!");
         }
         return map;
-       
+
     }
 
     /**
@@ -321,10 +315,10 @@ public class DeviceController {
         }
         return map;
     }
-    
-    
-    
-    
+
+
+
+
     /**
      * 设备安装APP
      * @throws Exception
@@ -373,9 +367,9 @@ public class DeviceController {
         }
         return map;
     }
-    
-  
-    
+
+
+
     /**
      * 设备卸载APP
      * @throws Exception
@@ -420,7 +414,7 @@ public class DeviceController {
         }
         return map;
     }
-    
+
     /**
      * 获取描述文件列表
      * @throws Exception
@@ -463,7 +457,7 @@ public class DeviceController {
         }
         return map;
     }
-    
+
     /**
      * 获取预置描述文件列表
      * @throws Exception
@@ -506,7 +500,7 @@ public class DeviceController {
         }
         return map;
     }
-    
+
     /**
      * 获取证书文件列表
      * @throws Exception
@@ -549,7 +543,7 @@ public class DeviceController {
         }
         return map;
     }
-	
+
 	/****************************************************************/
 	public DeviceService getDeviceService() {
 		return deviceService;
@@ -558,7 +552,7 @@ public class DeviceController {
 	public void setDeviceService(DeviceService deviceService) {
 		this.deviceService = deviceService;
 	}
-	
+
 	public CommandService getCommandService() {
 		return commandService;
 	}
@@ -566,7 +560,7 @@ public class DeviceController {
 	public void setCommandService(CommandService commandService) {
 		this.commandService = commandService;
 	}
-	
+
 	public DeviceTempService getDeviceTempService() {
 		return deviceTempService;
 	}
@@ -574,5 +568,5 @@ public class DeviceController {
 	public void setDeviceTempService(DeviceTempService deviceTempService) {
 		this.deviceTempService = deviceTempService;
 	}
-	
+
 }

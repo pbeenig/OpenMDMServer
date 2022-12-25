@@ -1,17 +1,16 @@
 package com.jiangge.dao.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
+import com.jiangge.dao.AppsDao;
+import com.jiangge.dao.common.BaseDao;
+import com.jiangge.pojo.Apps;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Component;
 
-import com.jiangge.dao.AppsDao;
-import com.jiangge.dao.common.BaseDao;
-import com.jiangge.pojo.Apps;
+import java.sql.SQLException;
+import java.util.List;
 
 @SuppressWarnings("all")
 @Component
@@ -34,7 +33,7 @@ public class AppsDaoImpl extends BaseDao implements AppsDao {
 		List<Apps> list = (List<Apps>) super.getAll(Apps.class);
 		return list;
 	}
-	
+
 	public Apps getByHql(String queryString,Object... params){
 		return (Apps)super.getByHql(queryString, params);
 	}
@@ -43,7 +42,7 @@ public class AppsDaoImpl extends BaseDao implements AppsDao {
 	public void saveOrUpdate(Apps apps) {
 		super.saveOrUpdate(apps);
 	}
-	
+
 	/**
 	 * 分页查询
 	 * @param hql
@@ -79,8 +78,8 @@ public class AppsDaoImpl extends BaseDao implements AppsDao {
 
 	@Override
 	public int count(String hql) {
-        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);  
-        int num = ((Number)query.iterate().next()).intValue();  
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        int num = ((Number)query.iterate().next()).intValue();
         return num;
 	}
 
@@ -103,7 +102,7 @@ public class AppsDaoImpl extends BaseDao implements AppsDao {
 	public List<Apps> myPage(String hql,int currentPage,int pageSize) {
 		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
 		query.setFirstResult((currentPage - 1)* pageSize);
-		query.setMaxResults(pageSize);			
+		query.setMaxResults(pageSize);
 		return (List<Apps>)query.list();
 	}
 
@@ -118,7 +117,7 @@ public class AppsDaoImpl extends BaseDao implements AppsDao {
 		List<Apps> list = (List<Apps>)super.getListByHql(queryString, params);
 		return list;
 	}
-	
-	
-	
+
+
+
 }

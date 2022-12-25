@@ -15,6 +15,16 @@
  */
 package com.jiangge.apns4j.impl;
 
+import com.jiangge.apns4j.IApnsConnection;
+import com.jiangge.apns4j.model.Command;
+import com.jiangge.apns4j.model.ErrorResponse;
+import com.jiangge.apns4j.model.Payload;
+import com.jiangge.apns4j.model.PushNotification;
+import com.jiangge.apns4j.tools.ApnsTools;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.net.SocketFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,33 +36,21 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.net.SocketFactory;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import static com.jiangge.apns4j.model.ApnsConstants.*;
-
-import com.jiangge.apns4j.IApnsConnection;
-import com.jiangge.apns4j.model.Command;
-import com.jiangge.apns4j.model.ErrorResponse;
-import com.jiangge.apns4j.model.Payload;
-import com.jiangge.apns4j.model.PushNotification;
-import com.jiangge.apns4j.tools.ApnsTools;
 
 /**
  * @author RamosLi
  *
  */
 public class ApnsConnectionImpl implements IApnsConnection {
-	
+
 	private static AtomicInteger IDENTIFIER = new AtomicInteger(100);
-	
+
 	private Log logger = LogFactory.getLog(ApnsConnectionImpl.class);
-	
+
 	// never expire
 	private int EXPIRE = Integer.MAX_VALUE;
-	
+
 	private SocketFactory factory;
 	/**
 	 * EN: There are two threads using the socket, one for writing, one for reading.
@@ -63,42 +61,42 @@ public class ApnsConnectionImpl implements IApnsConnection {
 	 * When a notification is sent, cache it into this queue. It may be resent.
 	 */
 	private Queue<PushNotification> notificationCachedQueue = new LinkedList<PushNotification>();
-	
+
 	/**
 	 * Whether find error in the last connection
 	 */
 	private boolean errorHappendedLastConn = false;
-	
+
 	/**
 	 * Whether first write data in the connection
 	 */
 	private boolean isFirstWrite = false;
-	
+
 	private int maxRetries;
 	private int maxCacheLength;
-	
+
 	private int readTimeOut;
-	
+
 	private String host;
 	private int port;
-	
+
 	/**
-	 * You can find the properly ApnsService to resend notifications by this name  
+	 * You can find the properly ApnsService to resend notifications by this name
 	 */
 	private String name;
-	
+
 	/**
 	 * connection name
 	 */
 	private String connName;
 	private int intervalTime;
 	private long lastSuccessfulTime = 0;
-	
+
 	private AtomicInteger notificaionSentCount = new AtomicInteger(0);
-	
+
 	private Object lock = new Object();
-	
-	public ApnsConnectionImpl(SocketFactory factory, String host, int port, int maxRetries, 
+
+	public ApnsConnectionImpl(SocketFactory factory, String host, int port, int maxRetries,
 			int maxCacheLength, String name, String connName, int intervalTime, int timeout) {
 		this.factory = factory;
 		this.host = host;
@@ -110,7 +108,7 @@ public class ApnsConnectionImpl implements IApnsConnection {
 		this.intervalTime = intervalTime;
 		this.readTimeOut = timeout;
 	}
-	
+
 	@Override
 	public void sendNotification(String token, Payload payload) {
 		PushNotification notification = new PushNotification();
@@ -120,7 +118,7 @@ public class ApnsConnectionImpl implements IApnsConnection {
 		notification.setPayload(payload);
 		sendNotification(notification);
 	}
-	
+
 	@Override
 	public void sendNotification(PushNotification notification) {
 		byte[] plBytes = null;
@@ -135,11 +133,11 @@ public class ApnsConnectionImpl implements IApnsConnection {
 			logger.error(e.getMessage(), e);
 			return;
 		}
-		
+
 		/**
 		 * EN: If error happened before, just wait until the resending work finishes by another thread
 		 *     and close the current socket
-		 * CN: 如果发现当前连接有error-response，加锁等待，直到另外一个线程把重发做完后再继续发送  
+		 * CN: 如果发现当前连接有error-response，加锁等待，直到另外一个线程把重发做完后再继续发送
 		 */
 		synchronized (lock) {
 			if (errorHappendedLastConn) {
@@ -156,11 +154,11 @@ public class ApnsConnectionImpl implements IApnsConnection {
 						closeSocket(socket);
 						socket = null;
 					}
-					
+
 					if (socket == null || socket.isClosed()) {
 						socket = createNewSocket();
 					}
-					
+
 					OutputStream socketOs = socket.getOutputStream();
 					socketOs.write(data);
 					socketOs.flush();
@@ -177,17 +175,17 @@ public class ApnsConnectionImpl implements IApnsConnection {
 				logger.error(String.format("%s Notification send failed. %s", connName, notification));
 				return;
 			} else {
-				logger.info(String.format("%s Send success. count: %s, notificaion: %s", connName, 
+				logger.info(String.format("%s Send success. count: %s, notificaion: %s", connName,
 						notificaionSentCount.incrementAndGet(), notification));
-				
+
 				notificationCachedQueue.add(notification);
 				lastSuccessfulTime = System.currentTimeMillis();
-				
+
 				/** TODO there is a bug, maybe, theoretically.
 				 *  CN: 假如我们发了一条错误的通知，然后又发了 maxCacheLength 条正确的通知。这时APNS服务器
 				 *      才返回第一条通知的error-response。此时，第一条通知已经从队列移除了。。
 				 *      其实后面100条该重发，但却没有。不过这个问题的概率很低，我们还是信任APNS服务器能及时返回
-				 */			
+				 */
 				if (notificationCachedQueue.size() > maxCacheLength) {
 					notificationCachedQueue.poll();
 				}
@@ -215,7 +213,7 @@ public class ApnsConnectionImpl implements IApnsConnection {
 		socket.setSoTimeout(readTimeOut);
 		// enable tcp_nodelay, any data will be sent immediately.
 		socket.setTcpNoDelay(true);
-		
+
 		return socket;
 	}
 	private void closeSocket(Socket socket) {
@@ -233,12 +231,12 @@ public class ApnsConnectionImpl implements IApnsConnection {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void close() throws IOException {
 		closeSocket(socket);
 	}
-	
+
 	private void startErrorWorker() {
 		Thread thread = new Thread(new Runnable() {
 
@@ -252,7 +250,7 @@ public class ApnsConnectionImpl implements IApnsConnection {
 					InputStream socketIs = curSocket.getInputStream();
 					byte[] res = new byte[ERROR_RESPONSE_BYTES_LENGTH];
 					int size = 0;
-					
+
 					while (true) {
 						try {
 							size = socketIs.read(res);
@@ -264,19 +262,19 @@ public class ApnsConnectionImpl implements IApnsConnection {
 							// There is no data. Keep reading.
 						}
 					}
-					
+
 					int command = res[0];
 					/** EN: error-response,close the socket and resent notifications
 					 *  CN: 一旦遇到错误返回就关闭连接，并且重新发送在它之后发送的通知
-					 */			
+					 */
 					if (size == res.length && command == Command.ERROR) {
 						int status = res[1];
 						int errorId = ApnsTools.parse4ByteInt(res[2], res[3], res[4], res[5]);
-						
+
 						if (logger.isInfoEnabled()) {
 							logger.info(String.format("%s Received error response. status: %s, id: %s, error-desc: %s", connName, status, errorId, ErrorResponse.desc(status)));
 						}
-						
+
 						Queue<PushNotification> resentQueue = new LinkedList<PushNotification>();
 
 						synchronized (lock) {
@@ -321,7 +319,7 @@ public class ApnsConnectionImpl implements IApnsConnection {
 				}
 			}
 		});
-		
+
 		thread.start();
 	}
 }

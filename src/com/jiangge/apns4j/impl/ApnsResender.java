@@ -15,13 +15,12 @@
  */
 package com.jiangge.apns4j.impl;
 
-import java.util.Queue;
-
+import com.jiangge.apns4j.IApnsService;
+import com.jiangge.apns4j.model.PushNotification;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.jiangge.apns4j.IApnsService;
-import com.jiangge.apns4j.model.PushNotification;
+import java.util.Queue;
 
 /**
  * EN: resend the notifications which sent after an error one using same connection

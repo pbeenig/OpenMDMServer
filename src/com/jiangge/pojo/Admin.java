@@ -1,33 +1,32 @@
 package com.jiangge.pojo;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity()
 @Table(name = "admin")
 public class Admin implements Serializable{
 
     private static final long serialVersionUID = -7048625537017892345L;
-    
+
     @Id
     private String id;
     /**用户名**/
     @Column(length = 50)
-    private String account;  
+    private String account;
     /**密码**/
     @Column(length = 50)
-    private  String password;   
+    private  String password;
     /**角色**/
     @Column(length = 10)
-    private  String role;         
+    private  String role;
     /**备注**/
     @Column(length = 255)
-    private  String remark;   
-    
+    private  String remark;
+
 
     public String getId() {
         return id;
@@ -69,5 +68,5 @@ public class Admin implements Serializable{
 		this.remark = remark;
 	}
 
-   
+
 }

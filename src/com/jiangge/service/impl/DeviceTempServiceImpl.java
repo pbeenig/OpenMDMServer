@@ -1,26 +1,24 @@
 package com.jiangge.service.impl;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Component;
-
 import com.jiangge.dao.DeviceTempDao;
 import com.jiangge.pojo.DeviceTemp;
 import com.jiangge.service.DeviceTempService;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 public class DeviceTempServiceImpl implements DeviceTempService {
-	
+
 	private DeviceTempDao deviceTempDao;
-	
+
 	@Override
 	public void save(DeviceTemp deviceTemp) {
 		deviceTempDao.add(deviceTemp);
 	}
-	
+
 	@Override
 	public DeviceTemp getDeviceTempById(String id) {
 		return deviceTempDao.getDeviceTempById(id);
@@ -34,7 +32,7 @@ public class DeviceTempServiceImpl implements DeviceTempService {
 	public DeviceTempDao getDeviceTempDao() {
 		return deviceTempDao;
 	}
-	
+
 	@Resource
 	public void setDeviceTempDao(DeviceTempDao deviceTempDao) {
 		this.deviceTempDao = deviceTempDao;
@@ -76,6 +74,6 @@ public class DeviceTempServiceImpl implements DeviceTempService {
 	public void deleteDeviceTempByDeviceId(String deviceId) {
 		deviceTempDao.deleteDeviceTempByDeviceId(deviceId);
 	}
-	
-	
+
+
 }

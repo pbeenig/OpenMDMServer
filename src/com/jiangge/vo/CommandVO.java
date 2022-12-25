@@ -1,8 +1,8 @@
 package com.jiangge.vo;
 
-import java.sql.Timestamp;
-
 import com.jiangge.pojo.Command;
+
+import java.sql.Timestamp;
 
 public class CommandVO {
 
@@ -23,7 +23,7 @@ public class CommandVO {
 	private String cvalue;
 	/** 执行结果 **/
 	private String result;
-	
+
 	public CommandVO(Command command){
 		this.id = command.getId();
 		this.deviceId = command.getDeviceId();

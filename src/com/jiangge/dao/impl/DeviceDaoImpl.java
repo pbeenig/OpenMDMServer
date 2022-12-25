@@ -1,17 +1,16 @@
 package com.jiangge.dao.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
+import com.jiangge.dao.DeviceDao;
+import com.jiangge.dao.common.BaseDao;
+import com.jiangge.pojo.Device;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Component;
 
-import com.jiangge.dao.DeviceDao;
-import com.jiangge.dao.common.BaseDao;
-import com.jiangge.pojo.Device;
+import java.sql.SQLException;
+import java.util.List;
 
 @SuppressWarnings("all")
 @Component
@@ -34,7 +33,7 @@ public class DeviceDaoImpl extends BaseDao implements DeviceDao {
 		List<Device> list = (List<Device>) super.getAll(Device.class);
 		return list;
 	}
-	
+
 	public Device getByHql(String queryString,Object... params){
 		return (Device)super.getByHql(queryString, params);
 	}
@@ -43,7 +42,7 @@ public class DeviceDaoImpl extends BaseDao implements DeviceDao {
 	public void saveOrUpdate(Device device) {
 		super.saveOrUpdate(device);
 	}
-	
+
 	/**
 	 * 分页查询
 	 * @param hql
@@ -80,8 +79,8 @@ public class DeviceDaoImpl extends BaseDao implements DeviceDao {
 
 	@Override
 	public int count(String hql) {
-        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);  
-        int num = ((Number)query.iterate().next()).intValue();  
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        int num = ((Number)query.iterate().next()).intValue();
         return num;
 	}
 
@@ -96,7 +95,7 @@ public class DeviceDaoImpl extends BaseDao implements DeviceDao {
 		Query query =super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();
 	}
-	
-	
-	
+
+
+
 }

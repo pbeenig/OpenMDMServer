@@ -1,17 +1,13 @@
 package com.jiangge.utils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 
 public class DateUtil {
@@ -34,10 +30,10 @@ public class DateUtil {
 
 	/** 格式：小时：分钟：秒 **/
 	public static final String LONG_TIME_FORMAT = "HH:mm:ss";
-	
+
     /** yyyyMMddHHmmss 紧凑类型 **/
 	public static final String LONG_DATE_COMPACT_FORMAT = "yyyyMMddHHmmss" ;
-	// 年的加减 
+	// 年的加减
 	public static final int SUB_YEAR = Calendar.YEAR;
 
 	// 月加减
@@ -65,7 +61,7 @@ public class DateUtil {
 
 	/**
 	 * 把符合日期格式的字符串转换为日期类型
-	 * 
+	 *
 	 * @param dateStr
 	 * @return
 	 */
@@ -101,7 +97,7 @@ public class DateUtil {
 
 	/**
 	 * 把日期转换为字符串
-	 * 
+	 *
 	 * @param date
 	 * @return
 	 */
@@ -118,7 +114,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前时间的指定格式
-	 * 
+	 *
 	 * @param format
 	 * @return
 	 */
@@ -127,7 +123,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param dateStr
 	 * @param amount
 	 * @return
@@ -142,7 +138,7 @@ public class DateUtil {
 
 	/**
 	 * 两个日期相减
-	 * 
+	 *
 	 * @param firstTime
 	 * @param secTime
 	 * @return 相减得到的秒数
@@ -155,7 +151,7 @@ public class DateUtil {
 
 	/**
 	 * 获得某月的天数
-	 * 
+	 *
 	 * @param year
 	 *            int
 	 * @param month
@@ -185,7 +181,7 @@ public class DateUtil {
 
 	/**
 	 * 获取某年某月的天数
-	 * 
+	 *
 	 * @param year
 	 *            int
 	 * @param month
@@ -200,7 +196,7 @@ public class DateUtil {
 
 	/**
 	 * 获得当前日期
-	 * 
+	 *
 	 * @return int
 	 */
 	public static int getToday() {
@@ -210,7 +206,7 @@ public class DateUtil {
 
 	/**
 	 * 获得当前月份
-	 * 
+	 *
 	 * @return int
 	 */
 	public static int getToMonth() {
@@ -220,7 +216,7 @@ public class DateUtil {
 
 	/**
 	 * 获得当前年份
-	 * 
+	 *
 	 * @return int
 	 */
 	public static int getToYear() {
@@ -230,7 +226,7 @@ public class DateUtil {
 
 	/**
 	 * 返回日期的天
-	 * 
+	 *
 	 * @param date
 	 *            Date
 	 * @return int
@@ -243,7 +239,7 @@ public class DateUtil {
 
 	/**
 	 * 返回日期的年
-	 * 
+	 *
 	 * @param date
 	 *            Date
 	 * @return int
@@ -256,7 +252,7 @@ public class DateUtil {
 
 	/**
 	 * 返回日期的月份，1-12
-	 * 
+	 *
 	 * @param date
 	 *            Date
 	 * @return int
@@ -269,7 +265,7 @@ public class DateUtil {
 
 	/**
 	 * 计算两个日期相差的天数，如果date2 > date1 返回正数，否则返回负数
-	 * 
+	 *
 	 * @param date1
 	 *            Date
 	 * @param date2
@@ -282,7 +278,7 @@ public class DateUtil {
 
 	/**
 	 * 比较两个日期的年差
-	 * 
+	 *
 	 * @param befor
 	 * @param after
 	 * @return
@@ -295,7 +291,7 @@ public class DateUtil {
 
 	/**
 	 * 比较指定日期与当前日期的差
-	 * 
+	 *
 	 * @param befor
 	 * @param after
 	 * @return
@@ -322,7 +318,7 @@ public class DateUtil {
 
 	/**
 	 * 获得当前日期字符串，格式"yyyy_MM_dd_HH_mm_ss"
-	 * 
+	 *
 	 * @return
 	 */
 	public static String getCurrent() {
@@ -345,7 +341,7 @@ public class DateUtil {
 
 	/**
 	 * 获得当前日期字符串，格式"yyyy-MM-dd HH:mm:ss"
-	 * 
+	 *
 	 * @return
 	 */
 	public static String getNow() {
@@ -355,7 +351,7 @@ public class DateUtil {
 
 	/**
 	 * 根据生日获取星座
-	 * 
+	 *
 	 * @param birth
 	 *            YYYY-mm-dd
 	 * @return
@@ -379,7 +375,7 @@ public class DateUtil {
 
 	/**
 	 * 判断日期是否有效,包括闰年的情况
-	 * 
+	 *
 	 * @param date
 	 *            YYYY-mm-dd
 	 * @return
@@ -400,7 +396,7 @@ public class DateUtil {
 
 	/**
 	 * 取得指定日期过 months 月后的日期 (当 months 为负数表示指定月之前);
-	 * 
+	 *
 	 * @param date
 	 *            日期 为null时表示当天
 	 * @param month
@@ -417,7 +413,7 @@ public class DateUtil {
 
 	/**
 	 * 取得指定日期过 day 天后的日期 (当 day 为负数表示指定月之前);
-	 * 
+	 *
 	 * @param date
 	 *            日期 为null时表示当天
 	 * @param month
@@ -434,7 +430,7 @@ public class DateUtil {
 
 	/**
 	 * 取得指定日期过 day 周后的日期 (当 day 为负数表示指定月之前)
-	 * 
+	 *
 	 * @param date
 	 *            日期 为null时表示当天
 	 */
@@ -449,7 +445,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前的日期
-	 * 
+	 *
 	 * @return
 	 */
 	public static String currDay() {
@@ -458,7 +454,7 @@ public class DateUtil {
 
 	/**
 	 * 获取昨天的日期
-	 * 
+	 *
 	 * @return
 	 */
 	public static String befoDay() {
@@ -476,7 +472,7 @@ public class DateUtil {
 
 	/**
 	 * 取得当前时间距离1900/1/1的天数
-	 * 
+	 *
 	 * @return
 	 */
 	public static int getDayNum() {
@@ -491,7 +487,7 @@ public class DateUtil {
 
 	/**
 	 * getDayNum的逆方法(用于处理Excel取出的日期格式数据等)
-	 * 
+	 *
 	 * @param day
 	 * @return
 	 */
@@ -522,7 +518,7 @@ public class DateUtil {
 
 	/**
 	 * 根据一个日期，返回是星期几的字符串
-	 * 
+	 *
 	 * @param sdate
 	 * @return
 	 */
@@ -539,7 +535,7 @@ public class DateUtil {
 
 	/**
 	 * 将短时间格式字符串转换为时间 yyyy-MM-dd
-	 * 
+	 *
 	 * @param strDate
 	 * @return
 	 */
@@ -552,7 +548,7 @@ public class DateUtil {
 
 	/**
 	 * 两个时间之间的天数
-	 * 
+	 *
 	 * @param date1
 	 * @param date2
 	 * @return
@@ -868,7 +864,7 @@ public class DateUtil {
 		return years_value + "-" + start_month + "-" + start_days;
 
 	}
-	
+
 	// 获得本季度
 	public String getThisSeasonTime(int month) {
 		int array[][] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 10, 11, 12 } };
@@ -903,7 +899,7 @@ public class DateUtil {
 
 	/**
 	 * 获取某年某月的最后一天
-	 * 
+	 *
 	 * @param year
 	 *            年
 	 * @param month
@@ -928,8 +924,8 @@ public class DateUtil {
 		return 0;
 	}
 
-	
-	
+
+
 	public static Date getTomorrow() {
 		Calendar current = Calendar.getInstance();
 		current.add(Calendar.DATE, 1);// 加一天
@@ -940,7 +936,7 @@ public class DateUtil {
 	}
 	/**
 	 * 是否闰年
-	 * 
+	 *
 	 * @param year
 	 *            年
 	 * @return
@@ -984,50 +980,50 @@ public class DateUtil {
 		System.out.println(tomorrow.after(now));
 		logger.debug(getAstro(birth));
 	}
-	
-	
+
+
 	/**
 	 * 获取参数月的上 12个月的 起始时间,返回值是从最远的时间点开始，比如当前为2012年9月，那么则返回[2011/9,2011/10,....2012/8]
-	 * 
+	 *
 	 * @param year
 	 * @param month
 	 * @return list[i][0] = start; list[i][1] = end; list[i][2] = year+"/"+month;
 	 */
 	public static String[][] getPreTwelveList(int year,int month){
 		String[][] list = new String[12][3];
-		
+
 		String start = "";
 		String end = "";
 		for (int i=0; i<12; i++) {
-			
+
 			int days = DateUtil.getDaysOfMonth(year, month);
-			
+
 			if (month>=1) {
-				
+
 				start = year + "-"+ month +"-01 00:00:00";
 				end = year + "-"+ month +"-" + days + " 00:00:00";
 
 			}else{
 				month=12;
-				
+
 				start =year -1 + "-"+ month +"-01 00:00:00";
 				end = year -1 + "-"+ month +"-" + days + " 00:00:00";
 				year--;
 			}
-			
+
 			list[12-i-1][0] = start;
 			list[12-i-1][1] = end;
 			list[12-i-1][2] = year+"/"+month;
-			
+
 			month--;
 		}
-		
+
 		return list;
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * 获取 在指定年份 的 指定月份之前的 月份
 	 *  例如：2012年8月之前的月份 包含8月,最近的月份放在第一个element中
@@ -1036,28 +1032,28 @@ public class DateUtil {
 	 */
 	public static String[][] getPreMonthList(int month,int year){
 		String[][] list = new String[12][3];
-		
+
 		String start = "";
 		String end = "";
 		for (int i=0; i< 12; i++) {
-			
+
 			if(month >=1 ){
 				int days = DateUtil.getDaysOfMonth(year, month);
-				
+
 				start = year + "-"+ month +"-01 00:00:00";
 				end = year + "-"+ month +"-" + days + " 00:00:00";
-				
+
 				list[12-i-1][0] = start;
 				list[12-i-1][1] = end;
 				list[12-i-1][2] = year+"/"+month;
-				
+
 				month--;
 			}
 		}
-		
+
 		return list;
 	}
-	
+
 	/**
 	 * 返回从beginYear年开始到去年的所有年份，最近的年份放在list的最开始处。
 	 * 例如beginYear2009，今年是2012年，则返回[2011,2010,2009]
@@ -1067,16 +1063,16 @@ public class DateUtil {
 	public static List<Integer> getPreYear(int beginYear) {
 		int preYear=DateUtil.getToYear()-1;  //去年
 		int noOfYear=preYear-beginYear+1;
-		
+
 		List<Integer> yearList = new ArrayList<Integer>(noOfYear);
-		
+
 		for (int year=preYear; year>=beginYear; year--) {
 			yearList.add(year);
 		}
-		
+
 		return yearList;
 	}
-	
+
 	/**
 	 * 包括beginYear年。
 	 * 返回从beginYear年开始到去年的所有年份，最近的年份放在list的最开始处。
@@ -1087,13 +1083,13 @@ public class DateUtil {
 	public static List<Integer> getBeginYearToPreYear(int beginYear) {
 		int curyear=DateUtil.getToYear();  //去年
 		int noOfYear=curyear-beginYear+1;
-		
+
 		List<Integer> yearList = new ArrayList<Integer>(noOfYear);
-		
+
 		for (int year=curyear; year>=beginYear; year--) {
 			yearList.add(year);
 		}
-		
+
 		return yearList;
 	}
 }

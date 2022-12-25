@@ -1,26 +1,24 @@
 package com.jiangge.service.impl;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Component;
-
 import com.jiangge.dao.ProfileDao;
 import com.jiangge.pojo.Profile;
 import com.jiangge.service.ProfileService;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 public class ProfileServiceImpl implements ProfileService {
-	
+
 	private ProfileDao profileDao;
-	
+
 	@Override
 	public void save(Profile profile) {
 		profileDao.add(profile);
 	}
-	
+
 	@Override
 	public Profile getProfileById(String id) {
 		return profileDao.getProfileById(id);
@@ -34,7 +32,7 @@ public class ProfileServiceImpl implements ProfileService {
 	public ProfileDao getProfileDao() {
 		return profileDao;
 	}
-	
+
 	@Resource
 	public void setProfileDao(ProfileDao profileDao) {
 		this.profileDao = profileDao;
@@ -81,6 +79,6 @@ public class ProfileServiceImpl implements ProfileService {
 	public void deleteProfileByDeviceId(String deviceId, String ctype) {
 		profileDao.deleteProfileByDeviceId(deviceId,ctype);
 	}
-	
-	
+
+
 }

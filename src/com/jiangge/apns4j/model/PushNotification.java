@@ -15,32 +15,32 @@
  */
 package com.jiangge.apns4j.model;
 
+import com.jiangge.apns4j.tools.ApnsTools;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
-
-import com.jiangge.apns4j.tools.ApnsTools;
 
 public class PushNotification {
 	/*
 	 * The notification’s priority. Provide one of the following values:
     	(1) 10    The push message is sent immediately.
-    	The push notification must trigger an alert, sound, or badge on the device. 
+    	The push notification must trigger an alert, sound, or badge on the device.
     	It is an error to use this priority for a push that contains only the content-available key.
-    	
+
     	(2)5    The push message is sent at a time that conserves power on the device receiving it.
 	 */
 	public static final int PRIORITY_SENT_IMMEDIATELY = 10;
 	public static final int PRIORITY_SENT_A_TIME = 5;
-	
+
 	private static final Pattern pattern = Pattern.compile("[ -]");
-	
+
 	private int id;
 	private int expire;
 	private String token;
 	private Payload payload;
 	private int priority = PRIORITY_SENT_IMMEDIATELY;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -66,7 +66,7 @@ public class PushNotification {
 		this.payload = payload;
 	}
 	/**
-	 * We need to check the size of payload. 
+	 * We need to check the size of payload.
 	 * After checking, reuse it in order to avoid calculate bytes array twice although it seems not perfect
 	 * @param payloads
 	 * @return

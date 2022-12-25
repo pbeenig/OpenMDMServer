@@ -1,9 +1,5 @@
 package com.jiangge.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-
 import com.jiangge.apns4j.IApnsService;
 import com.jiangge.apns4j.impl.ApnsServiceImpl;
 import com.jiangge.apns4j.model.ApnsConfig;
@@ -11,6 +7,10 @@ import com.jiangge.apns4j.model.Payload;
 import com.jiangge.pojo.Device;
 import com.notnoop.apns.APNS;
 import com.notnoop.apns.ApnsService;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 /**
  * Java向Apple服务器PUSH消息
@@ -30,7 +30,7 @@ public class PushUtils {
     static{
         MDMPASS = ConfigUtils.getConfig("APNS_MDMPASS");
     }
-	
+
 	private static IApnsService getApnsService(String p12Path) {
 		try{
 			if (apnsService == null) {
@@ -48,7 +48,7 @@ public class PushUtils {
 		}
 		return apnsService;
 	}
-	
+
 	/**
      * 向单个iPhone手机推送消息.
      * @param  mdm    推送参数
@@ -95,7 +95,7 @@ public class PushUtils {
         }
         return pushState;
     }
-    
+
     public static void main(String[] as){
     	Device mdm = new Device();
     	mdm.setPushMagic("26A1FD5C-2D78-45E6-B864-19327BD1C0AD");
@@ -105,5 +105,5 @@ public class PushUtils {
     	PushUtils.singleMDMPush(p12Path, mdm);
     }
 
-   
+
 }

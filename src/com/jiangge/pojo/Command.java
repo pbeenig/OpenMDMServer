@@ -1,39 +1,38 @@
 package com.jiangge.pojo;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Entity()
 @Table(name = "command")
 public class Command implements Serializable{
 
     private static final long serialVersionUID = -7048625537017892345L;
-    
+
     @Id
     private String id;
     /**设备编号（和Device主键对应）**/
-    private String deviceId;  
+    private String deviceId;
     /**发送的命令**/
-    private  String command;   
+    private  String command;
     /**是否执行（3：失败，2：已成功,1：已执行，0：未执行）**/
-    private  String doIt;         
+    private  String doIt;
     /**注册时间**/
     private Timestamp createTime = new Timestamp(System.currentTimeMillis());
     /**命令类型**/
-    private  String ctype; 
+    private  String ctype;
     /**类型值**/
-    private  String cvalue; 
+    private  String cvalue;
     /**执行结果**/
     @Column(length = 65535)
-    private  String result;   
+    private  String result;
     /**回调地址**/
     private  String callBack;
-    
+
 
     public String getCtype() {
 		return ctype;
@@ -106,5 +105,5 @@ public class Command implements Serializable{
 	public void setCallBack(String callBack) {
 		this.callBack = callBack;
 	}
-    
+
 }

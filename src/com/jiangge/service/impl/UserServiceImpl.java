@@ -1,26 +1,24 @@
 package com.jiangge.service.impl;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Component;
-
 import com.jiangge.dao.UserDao;
 import com.jiangge.pojo.User;
 import com.jiangge.service.UserService;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 public class UserServiceImpl implements UserService {
-	
+
 	private UserDao userDao;
-	
+
 	@Override
 	public void save(User user) {
 		userDao.add(user);
 	}
-	
+
 	@Override
 	public User getUserById(String id) {
 		return userDao.getUserById(id);
@@ -34,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	public UserDao getUserDao() {
 		return userDao;
 	}
-	
+
 	@Resource
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
@@ -54,7 +52,7 @@ public class UserServiceImpl implements UserService {
 			userDao.saveOrUpdate(user);
 		}
 	}
-	
-	
-	
+
+
+
 }

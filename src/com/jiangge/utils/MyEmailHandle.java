@@ -1,22 +1,13 @@
 package com.jiangge.utils;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.*;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
-
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
 
 /**
  * @author jiang.li
@@ -24,15 +15,15 @@ import javax.mail.internet.MimeUtility;
  */
 public class MyEmailHandle {
 
-	private MimeMessage mimeMsg; 
-	private Session session; 
+	private MimeMessage mimeMsg;
+	private Session session;
 	private Properties props;
 	private String sendUserName;
-	private String sendUserPass; 
+	private String sendUserPass;
 	private Multipart mp;
 	private List<FileDataSource> files = new LinkedList<FileDataSource>();
 
-	
+
 	public MyEmailHandle(String smtp) {
 		sendUserName = "";
 		sendUserPass = "";
@@ -60,7 +51,7 @@ public class MyEmailHandle {
 			System.err.println(e);
 			return false;
 		}
-		
+
 	}
 
 	/**
@@ -72,7 +63,7 @@ public class MyEmailHandle {
 		}else{
 			props.put("mail.smtp.auth", "false");
 		}
-			
+
 	}
 
 	/**
@@ -83,7 +74,7 @@ public class MyEmailHandle {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param mailSubject
 	 * @return
 	 */
@@ -94,7 +85,7 @@ public class MyEmailHandle {
 		} catch (Exception e) {
 			return false;
 		}
-		
+
 	}
 
 	/**
@@ -121,7 +112,7 @@ public class MyEmailHandle {
 			BodyPart bp = new MimeBodyPart();
 			FileDataSource fileds = new FileDataSource(filename);
 			bp.setDataHandler(new DataHandler(fileds));
-			bp.setFileName(MimeUtility.encodeText(fileds.getName(), "UTF-8",null)); 
+			bp.setFileName(MimeUtility.encodeText(fileds.getName(), "UTF-8",null));
 			mp.addBodyPart(bp);
 			files.add(fileds);
 			return true;
@@ -129,7 +120,7 @@ public class MyEmailHandle {
 			System.err.println(e);
 			return false;
 		}
-		
+
 	}
 
 	/**
@@ -149,7 +140,7 @@ public class MyEmailHandle {
 			System.err.println(e);
 			return false;
 		}
-		
+
 	}
 
 	/**

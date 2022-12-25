@@ -1,17 +1,16 @@
 package com.jiangge.dao.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
+import com.jiangge.dao.CommandDao;
+import com.jiangge.dao.common.BaseDao;
+import com.jiangge.pojo.Command;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Component;
 
-import com.jiangge.dao.CommandDao;
-import com.jiangge.dao.common.BaseDao;
-import com.jiangge.pojo.Command;
+import java.sql.SQLException;
+import java.util.List;
 
 @SuppressWarnings("all")
 @Component
@@ -39,7 +38,7 @@ public class CommandDaoImpl extends BaseDao implements CommandDao {
 	public void deleteCommandById(String id) {
 		super.deleteById(Command.class, id);
 	}
-	
+
 	public Command getByHql(String queryString,Object... params){
 		return (Command)super.getByHql(queryString, params);
 	}
@@ -55,7 +54,7 @@ public class CommandDaoImpl extends BaseDao implements CommandDao {
 		Query query =super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();
 	}
-	
+
 	/**
 	 * 分页查询
 	 * @param hql
@@ -79,7 +78,7 @@ public class CommandDaoImpl extends BaseDao implements CommandDao {
 			}
 		});
 	}
-	
+
 
 	/**
 	 * 分页查询
@@ -93,8 +92,8 @@ public class CommandDaoImpl extends BaseDao implements CommandDao {
 
 	@Override
 	public int count(String hql) {
-       Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);  
-       int num = ((Number)query.iterate().next()).intValue();  
+       Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+       int num = ((Number)query.iterate().next()).intValue();
        return num;
 	}
 
@@ -103,6 +102,6 @@ public class CommandDaoImpl extends BaseDao implements CommandDao {
 	public List<Command> getAllByHql(String queryString, Object... params) {
 		return (List<Command>)super.getListByHql(queryString, params);
 	}
-	
-	
+
+
 }

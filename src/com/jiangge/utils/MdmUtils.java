@@ -1,4 +1,9 @@
 package com.jiangge.utils;
+
+import Decoder.BASE64Decoder;
+import com.alibaba.fastjson.JSON;
+import com.jiangge.pojo.Device;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,11 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import Decoder.BASE64Decoder;
-
-import com.alibaba.fastjson.JSON;
-import com.jiangge.pojo.Device;
 
 /**
  * 和IOS的MDM相关的工具方法
@@ -203,7 +203,7 @@ public class MdmUtils {
      */
     public static String readConfig(String path) throws IOException {
         String config=  ConfigUtils.getConfig("APNS_CONFIG");
-        InputStream fis = new FileInputStream(path + config);        
+        InputStream fis = new FileInputStream(path + config);
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
         StringBuffer sb = new StringBuffer();
         String line;
@@ -258,7 +258,7 @@ public class MdmUtils {
         backString.append("</plist>");
         return backString.toString();
     }
-    
+
     /**
      * 发送命令的pList格式的模板文件
      * @return
@@ -313,7 +313,7 @@ public class MdmUtils {
         backString.append("</plist>");
         return backString.toString();
     }
-    
+
     /**
      * 发送安装APP的pList格式的模板文件
      * @return
@@ -344,7 +344,7 @@ public class MdmUtils {
         backString.append("</plist>");
         return backString.toString();
     }
-    
+
     /**
      * 发送移除APP的pList格式的模板文件
      * @return
@@ -367,8 +367,8 @@ public class MdmUtils {
         backString.append("<string>"+commandUUID+"</string>\n");
         backString.append("</dict>\n");
         backString.append("</plist>");
-        
-        
+
+
         return backString.toString();
     }
 
@@ -484,7 +484,7 @@ public class MdmUtils {
         }
         return plistMap;
     }
-    
+
     /**
      * 获取ProfileList的pList文件Map数据
      * @param pList
@@ -511,7 +511,7 @@ public class MdmUtils {
         }
         return profileList;
     }
-    
+
     /**
      * 获取ProvisioningProfileList的pList文件Map数据
      * @param pList
@@ -537,7 +537,7 @@ public class MdmUtils {
           }
           return provisioningProfileList;
     }
-    
+
     /**
      * 获取CertificateList的pList文件Map数据
      * @param pList
@@ -563,7 +563,7 @@ public class MdmUtils {
         }
         return certificateList;
     }
-    
+
 
     /**
      * 获取字符串列表数据
@@ -598,7 +598,7 @@ public class MdmUtils {
         }
         return strBlank;
     }
-    
+
     /**
      * 创建MobileConfig配置文件
      * @param filePath
@@ -626,25 +626,25 @@ public class MdmUtils {
         }
         return createSuccess;
     }
-    
+
     /**
      * 将inputStream转化成为String
      * @param is
      * @return
      * @throws IOException
      */
-    public static String inputStream2String(InputStream is) throws IOException{ 
-    	ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-    	int i = -1; 
-    	while((i=is.read())!=-1){ 
-    	    baos.write(i); 
-    	} 
+    public static String inputStream2String(InputStream is) throws IOException{
+    	ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    	int i = -1;
+    	while((i=is.read())!=-1){
+    	    baos.write(i);
+    	}
     	byte[] lens = baos.toByteArray();
     	String result = new String(lens,"UTF-8");
     	return result;
-    } 
-    
-    
+    }
+
+
     public static String getXML(){
         StringBuffer backString = new StringBuffer();
         backString.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");

@@ -1,28 +1,26 @@
 package com.jiangge.service.impl;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Component;
-
 import com.jiangge.dao.CommandDao;
 import com.jiangge.dao.DeviceDao;
 import com.jiangge.pojo.Command;
 import com.jiangge.service.CommandService;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CommandServiceImpl implements CommandService {
-	
+
 	private CommandDao commandDao;
 	private DeviceDao deviceDao;
-	
+
 	@Override
 	public void save(Command command) {
 		commandDao.add(command);
 	}
-	
+
 	@Override
 	public Command getCommandById(String id) {
 		return commandDao.getCommandById(id);
@@ -41,16 +39,16 @@ public class CommandServiceImpl implements CommandService {
 	public CommandDao getCommandDao() {
 		return commandDao;
 	}
-	
+
 	@Resource
 	public void setCommandDao(CommandDao commandDao) {
 		this.commandDao = commandDao;
 	}
-	
+
 	public DeviceDao getDeviceDao() {
 		return deviceDao;
 	}
-	
+
 	@Resource
 	public void setDeviceDao(DeviceDao deviceDao) {
 		this.deviceDao = deviceDao;
@@ -60,7 +58,7 @@ public class CommandServiceImpl implements CommandService {
 	public Command getCommandByHql(String queryString, Object... params) {
 		return commandDao.getByHql(queryString, params);
 	}
-	
+
 	@Override
 	public void saveOrUpdate(Command command) {
 		if(null == command.getId() || "".equals(command.getId())){
@@ -92,5 +90,5 @@ public class CommandServiceImpl implements CommandService {
 	public List<Command> getAllCommandByHql(String queryString,Object... params) {
 		return commandDao.getAllByHql(queryString, params);
 	}
-	
+
 }

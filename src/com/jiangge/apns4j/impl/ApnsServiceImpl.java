@@ -15,20 +15,6 @@
  */
 package com.jiangge.apns4j.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import javax.net.SocketFactory;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import static com.jiangge.apns4j.model.ApnsConstants.*;
-
 import com.jiangge.apns4j.IApnsConnection;
 import com.jiangge.apns4j.IApnsFeedbackConnection;
 import com.jiangge.apns4j.IApnsService;
@@ -37,6 +23,18 @@ import com.jiangge.apns4j.model.Feedback;
 import com.jiangge.apns4j.model.Payload;
 import com.jiangge.apns4j.model.PushNotification;
 import com.jiangge.apns4j.tools.ApnsTools;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.net.SocketFactory;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import static com.jiangge.apns4j.model.ApnsConstants.*;
 
 /**
  * The service should be created twice at most. One for the development env, and the other for the production env
@@ -51,19 +49,19 @@ public class ApnsServiceImpl implements IApnsService {
 	private ApnsServiceImpl(ApnsConfig config) {
 		int poolSize = config.getPoolSize();
 		service = Executors.newFixedThreadPool(poolSize);
-		
-		SocketFactory factory = ApnsTools.createSocketFactory(config.getKeyStore(), config.getPassword(), 
+
+		SocketFactory factory = ApnsTools.createSocketFactory(config.getKeyStore(), config.getPassword(),
 				KEYSTORE_TYPE, ALGORITHM, PROTOCOL);
 		connPool = ApnsConnectionPool.newConnPool(config, factory);
 		feedbackConn = new ApnsFeedbackConnectionImpl(config, factory);
 	}
-	
+
 	@Override
 	public void sendNotification(final String token, final Payload payload) {
 		service.execute(new Runnable() {
 			@Override
 			public void run() {
-				IApnsConnection conn = null; 
+				IApnsConnection conn = null;
 				try {
 					conn = getConnection();
 					conn.sendNotification(token, payload);
@@ -82,7 +80,7 @@ public class ApnsServiceImpl implements IApnsService {
 		service.execute(new Runnable() {
 			@Override
 			public void run() {
-				IApnsConnection conn = null; 
+				IApnsConnection conn = null;
 				try {
 					conn = getConnection();
 					conn.sendNotification(notification);
@@ -103,9 +101,9 @@ public class ApnsServiceImpl implements IApnsService {
 		}
 		return conn;
 	}
-	
+
 	private static void checkConfig(ApnsConfig config) {
-		if (config == null || config.getKeyStore() == null || config.getPassword() == null || 
+		if (config == null || config.getKeyStore() == null || config.getPassword() == null ||
 				"".equals(config.getPassword().trim())) {
 			throw new IllegalArgumentException("KeyStore and password can't be null");
 		}

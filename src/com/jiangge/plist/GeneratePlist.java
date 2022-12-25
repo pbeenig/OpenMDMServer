@@ -1,42 +1,31 @@
 package com.jiangge.plist;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
-import java.security.Key;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.Signature;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
-
+import Decoder.BASE64Encoder;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import Decoder.BASE64Encoder;
+import java.io.*;
+import java.net.URL;
+import java.security.*;
+import java.security.cert.CertificateException;
 
 
 /**
  * This class is to generate encoded plist for iOS MDM signing request. Below
  * files should be in the folder : - customer.der - intermediate.pem - mdm.pem -
  * root.pem - vendor.p12
- * 
+ *
  * Then upload 'plist_encoded' to https://identity.apple.com/pushcert/ to
  * generate the certificate for your customer.
- * 
+ *
  * [Author Introduction] Softhinker.com is a Singapore-based independent
  * software vendor, focusing on J2EE, Android, iOS, Google Apps development and
  * consultancy. Please visit us at http://www.softhinker.com for more details.
- * 
+ *
  * @author Softhinker
- * 
+ *
  */
 public class GeneratePlist {
 	public static void main(String[] args) throws Exception {

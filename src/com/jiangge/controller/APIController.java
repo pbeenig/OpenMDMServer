@@ -1,51 +1,36 @@
 package com.jiangge.controller;
 
+import com.jiangge.pojo.*;
+import com.jiangge.service.*;
+import com.jiangge.utils.*;
+import com.jiangge.vo.HttpConst;
+import com.jiangge.vo.InstallTypeEnum;
+import com.jiangge.vo.MobileBean;
+import com.jiangge.vo.PageBean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.jiangge.pojo.Apps;
-import com.jiangge.pojo.Command;
-import com.jiangge.pojo.Device;
-import com.jiangge.pojo.DeviceTemp;
-import com.jiangge.pojo.Profile;
-import com.jiangge.service.AppsService;
-import com.jiangge.service.CommandService;
-import com.jiangge.service.DeviceService;
-import com.jiangge.service.DeviceTempService;
-import com.jiangge.service.ProfileService;
-import com.jiangge.utils.ConfigUtils;
-import com.jiangge.utils.MDMTaskUtils;
-import com.jiangge.utils.MdmUtils;
-import com.jiangge.utils.PushUtils;
-import com.jiangge.utils.StringUtils;
-import com.jiangge.vo.HttpConst;
-import com.jiangge.vo.InstallTypeEnum;
-import com.jiangge.vo.MobileBean;
-import com.jiangge.vo.PageBean;
-
 @SuppressWarnings("all")
 @Controller
 @RequestMapping("/api")
 public class APIController {
-	
+
 	private DeviceService deviceService;
 	private CommandService commandService;
 	private AppsService appsService;
 	private ProfileService profileService;
 	private DeviceTempService deviceTempService;
-	
+
 	/**
 	 * 获取mobileconfig下载地址
 	 */
@@ -90,9 +75,9 @@ public class APIController {
 			bean.setData("出错了:"+e.getMessage());
 		}
 		System.out.println("-------------------getMobileconfig End---------------");
-	    return bean;  
+	    return bean;
 	}
-	
+
 	/**
      * 获取设备的ProfileList
      */
@@ -143,7 +128,7 @@ public class APIController {
     	}
         return bean;
     }
-    
+
     /**
      * 获取设备的ProvisioningProfileList
      */
@@ -194,7 +179,7 @@ public class APIController {
     	}
         return bean;
     }
-    
+
     /**
      * 获取设备的CertificateList
      */
@@ -245,7 +230,7 @@ public class APIController {
     	}
         return bean;
     }
-	
+
 	 /**
      * 设备锁屏功能
      */
@@ -501,7 +486,7 @@ public class APIController {
     	}
         return bean;
     }
-    
+
     /**
      * 获取设备已经安装的可管控的app信息
      */
@@ -553,9 +538,9 @@ public class APIController {
     	}
         return bean;
     }
-    
-    
-    
+
+
+
     /**
      * 设备安装APP
      */
@@ -611,9 +596,9 @@ public class APIController {
     	}
         return bean;
     }
-    
-  
-    
+
+
+
     /**
      * 设备卸载APP
      */
@@ -665,10 +650,10 @@ public class APIController {
     	}
         return bean;
     }
-    
-    
+
+
     /********************************以下是获取设备本地数据*********************************/
-    
+
     /**
 	 * 获取消息日志详情
 	 */
@@ -694,9 +679,9 @@ public class APIController {
 			bean.setDesc(HttpConst.HTTP_STATUS_FAILURE);
 			bean.setData("出错了:"+e.getMessage());
 		}
-	    return bean;  
+	    return bean;
 	}
-	
+
 	/**
 	 * 删除消息日志
 	 */
@@ -722,9 +707,9 @@ public class APIController {
 			bean.setDesc(HttpConst.HTTP_STATUS_FAILURE);
 			bean.setData("出错了:"+e.getMessage());
 		}
-	    return bean;  
+	    return bean;
 	}
-	
+
 	/**
 	 * 分页获取命令日志列表
 	 */
@@ -752,9 +737,9 @@ public class APIController {
 			bean.setDesc(HttpConst.HTTP_STATUS_FAILURE);
 			bean.setData("出错了:"+e.getMessage());
 		}
-	    return bean;  
+	    return bean;
 	}
-	
+
 	/**
 	 * 根据设备ID获取命令日志列表
 	 */
@@ -775,9 +760,9 @@ public class APIController {
 			bean.setDesc(HttpConst.HTTP_STATUS_FAILURE);
 			bean.setData("出错了:"+e.getMessage());
 		}
-	    return bean;  
+	    return bean;
 	}
-	
+
 	/**
 	 * 更改设备标签
 	 */
@@ -808,9 +793,9 @@ public class APIController {
 			bean.setData("出错了:"+e.getMessage());
 		}
 		return bean;
-		
+
 	}
-	
+
 	/**
 	 * 设备移除
 	 */
@@ -840,8 +825,8 @@ public class APIController {
 		}
 		return bean;
 	}
-	
-	
+
+
 	/**
 	 * 设备详情
 	 */
@@ -872,9 +857,9 @@ public class APIController {
 			bean.setDesc(HttpConst.HTTP_STATUS_FAILURE);
 			bean.setData("出错了:"+e.getMessage());
 		}
-	    return bean;  
+	    return bean;
 	}
-	
+
 	/**
 	 * 分页获取设备数据列表
 	 */
@@ -902,9 +887,9 @@ public class APIController {
 			bean.setDesc(HttpConst.HTTP_STATUS_FAILURE);
 			bean.setData("出错了:"+e.getMessage());
 		}
-	    return bean;  
+	    return bean;
 	}
-	
+
 	/**
 	 * 设备的ProfileList
 	 */
@@ -931,9 +916,9 @@ public class APIController {
 			bean.setDesc(HttpConst.HTTP_STATUS_FAILURE);
 			bean.setData("出错了:"+e.getMessage());
 		}
-	    return bean;  
+	    return bean;
 	}
-	
+
 	/**
 	 * 设备的ProvisioningProfileList
 	 */
@@ -960,9 +945,9 @@ public class APIController {
 			bean.setDesc(HttpConst.HTTP_STATUS_FAILURE);
 			bean.setData("出错了:"+e.getMessage());
 		}
-	    return bean;  
+	    return bean;
 	}
-	
+
 	/**
 	 * 设备的CertificateList
 	 */
@@ -989,9 +974,9 @@ public class APIController {
 			bean.setDesc(HttpConst.HTTP_STATUS_FAILURE);
 			bean.setData("出错了:"+e.getMessage());
 		}
-	    return bean;  
+	    return bean;
 	}
-	
+
     /****************************************************************/
 	public DeviceService getDeviceService() {
 		return deviceService;
@@ -1000,7 +985,7 @@ public class APIController {
 	public void setDeviceService(DeviceService deviceService) {
 		this.deviceService = deviceService;
 	}
-	
+
 	public DeviceTempService getDeviceTempService() {
 		return deviceTempService;
 	}
@@ -1008,7 +993,7 @@ public class APIController {
 	public void setDeviceTempService(DeviceTempService deviceTempService) {
 		this.deviceTempService = deviceTempService;
 	}
-	
+
 	public CommandService getCommandService() {
 		return commandService;
 	}

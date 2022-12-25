@@ -15,13 +15,13 @@
  */
 package com.jiangge.apns4j;
 
-import java.io.Closeable;
-
 import com.jiangge.apns4j.model.Payload;
 import com.jiangge.apns4j.model.PushNotification;
 
+import java.io.Closeable;
+
 public interface IApnsConnection extends Closeable {
-	
+
 	public void sendNotification(String token, Payload payload);
 
 	public void sendNotification(PushNotification notification);

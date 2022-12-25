@@ -1,17 +1,16 @@
 package com.jiangge.dao.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
+import com.jiangge.dao.ProfileDao;
+import com.jiangge.dao.common.BaseDao;
+import com.jiangge.pojo.Profile;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Component;
 
-import com.jiangge.dao.ProfileDao;
-import com.jiangge.dao.common.BaseDao;
-import com.jiangge.pojo.Profile;
+import java.sql.SQLException;
+import java.util.List;
 
 @SuppressWarnings("all")
 @Component
@@ -34,7 +33,7 @@ public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 		List<Profile> list = (List<Profile>) super.getAll(Profile.class);
 		return list;
 	}
-	
+
 	public Profile getByHql(String queryString,Object... params){
 		return (Profile)super.getByHql(queryString, params);
 	}
@@ -43,7 +42,7 @@ public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 	public void saveOrUpdate(Profile profile) {
 		super.saveOrUpdate(profile);
 	}
-	
+
 	/**
 	 * 分页查询
 	 * @param hql
@@ -80,8 +79,8 @@ public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 
 	@Override
 	public int count(String hql) {
-        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);  
-        int num = ((Number)query.iterate().next()).intValue();  
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        int num = ((Number)query.iterate().next()).intValue();
         return num;
 	}
 
@@ -96,13 +95,13 @@ public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 		Query query =super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();
 	}
-	
+
 	@Override
 	public void deleteProfileByDeviceId(String deviceId,String ctype) {
 		String sql = "delete from Profile where deviceId = '"+deviceId+"' and ctype = '"+ctype+"'";
 		Query query =super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();
 	}
-	
-	
+
+
 }

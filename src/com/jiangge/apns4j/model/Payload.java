@@ -15,12 +15,12 @@
  */
 package com.jiangge.apns4j.model;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 /**
  * @author RamosLi
@@ -34,13 +34,13 @@ public class Payload {
 	private Integer badge;
 	private String sound = "default.caf";
 	private Integer contentAvailable;
-	
+
 	private String alertBody;
 	private String alertActionLocKey;
 	private String alertLocKey;
 	private String[] alertLocArgs;
 	private String alertLaunchImage;
-	
+
 	public Map<String, Object> getParams() {
 		return params;
 	}
@@ -56,7 +56,7 @@ public class Payload {
 		}
 		params.put(key, obj);
 	}
-	
+
 	public String getAlert() {
 		return alert;
 	}
@@ -75,7 +75,7 @@ public class Payload {
 	public void setSound(String sound) {
 		this.sound = sound;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public String toString() {
@@ -100,16 +100,16 @@ public class Payload {
 				apsObj.put("alert", alertObj);
 			}
 		}
-		
+
 		if (getBadge() != null) {
 			apsObj.put("badge", getBadge().intValue());
 		}
 		putIntoJson("sound", getSound(), apsObj);
-		
+
 		if (getContentAvailable() != null) {
 			apsObj.put("content-available", getContentAvailable().intValue());
 		}
-		
+
 		object.put(APS, apsObj);
 		if (getParams() != null) {
 			for (Entry<String, Object> e : getParams().entrySet()) {

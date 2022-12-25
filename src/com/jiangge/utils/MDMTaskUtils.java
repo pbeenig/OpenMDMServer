@@ -1,12 +1,12 @@
 package com.jiangge.utils;
 
+import com.jiangge.utils.task.TaskEntity;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jiangge.utils.task.TaskEntity;
-
 public class MDMTaskUtils {
-	
+
 	/**
 	 * 同步设备信息到数据库
 	 * @param deviceId
@@ -24,7 +24,7 @@ public class MDMTaskUtils {
 			System.out.println("MDMTaskUtils->syncDeviceInfo:" + e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * 通知第三方服务器更新
 	 * @param deviceId
@@ -44,7 +44,7 @@ public class MDMTaskUtils {
 			}
 		}
 	}
-	
+
 	/**
 	 * 命令执行后通知第三方服务器更新
 	 * @param callBack
@@ -63,7 +63,7 @@ public class MDMTaskUtils {
 			}
 		}
 	}
-	
+
 	/**
 	 * 生成Mobileconfig描述文件
 	 * @param configPath
